@@ -63,11 +63,11 @@
 		</div>
 
 		<div data-role="content">
-		 <form id="frmLogin">
+		 <form id="frmLogin" action="#">
 			<div data-role="main" class="ui-content">
 			  <div class="ui-field-contain">
 				<label for="email">Email id:</label>
-				<input type="text" name="email" class="required email" required="required" id="email">
+				<input type="text" name="email" class="required email" required="required email" id="email">
 				<br/>
 				<label for="password">Password:</label>
 				<input type="password" name="password" class="required" required="required" id="password">
@@ -105,6 +105,34 @@
 			alert("Password id is required");
 			return;
 			}
+			
+			
+			var dataString="email="+email+"&password="+password;
+				if($.trim(email).length>0 & $.trim(password).length>0)
+				{
+				$.ajax({
+				type: "POST",
+				url: url,
+				data: dataString,
+				crossDomain: true,
+				cache: false,
+				beforeSend: function(){ $("#signup").val('Connecting...');},
+				success: function(data){
+				if(data=="success")
+				{
+				alert("Thank you for Registering with us! you can login now");
+				}
+				else if(data="exist")
+				{
+				alert("Hey! You alreay has account! you can login with us");
+				}
+				else if(data="failed")
+				{
+				alert("Something Went wrong");
+				}
+				}
+				});
+				}return false;
 			
 			
 			
