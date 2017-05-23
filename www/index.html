@@ -93,6 +93,14 @@
         app.initialize();
     </script>
 	<script>
+	
+	function showSpinner(){
+				$.mobile.loading("show");
+			}
+
+			function hideSpinner(){
+				$.mobile.loading("hide");
+			}
 		$("#signup").click(function(){
 		
 			var email=$("#email").val();
@@ -109,7 +117,7 @@
 			var dataString="username="+email+"&password="+password;
 			var url="saibabatoursandtravel.com/ServiceCS.asmx/GetClientJSON";
 			
-			
+			showSpinner();
 			if($.trim(email).length>0 & $.trim(password).length>0)
 			{
 			$.ajax({
@@ -122,10 +130,12 @@
 			cache: false,
 			beforeSend: function(){ $("#signup").val('Connecting...');},
 			success: function(data){
+			hideSpinner();
 			alert(data);
+			alert(data.CLIENT_ID);
 			if(data=="success")
 			{
-			alert("Thank you for Registering with us! you can login now");
+			alert(data.CLIENT_ID);
 			}
 			else if(data="exist")
 			{
