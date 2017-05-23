@@ -132,10 +132,7 @@
 			success: function(data){
 			hideSpinner();
 			alert(data);
-			alert(data.CLIENT_ID);
-			var obj = jQuery.parseJSON( data );
-			alert( obj.d );
-			var obj = jQuery.parseJSON( obj.d );
+			var obj = jQuery.parseJSON( data.d );
 			alert( obj.CLIENT_ID );
 			$("#signup").val("Submit");
 			}
