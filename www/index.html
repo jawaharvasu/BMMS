@@ -131,9 +131,7 @@
 			cache: false,
 			success: function(data){
 			hideSpinner();
-			alert(data);
-			var obj = jQuery.parseJSON( data.d );
-			alert( obj.CLIENT_ID );
+			alert(JSON.stringify(data););
 			$("#signup").val("Submit");
 			}
 			});
