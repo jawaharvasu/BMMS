@@ -60,15 +60,15 @@
 	
 		<div data-role="header">
 			<a href="#" onclick="navigator.app.exitApp();" class="ui-btn ui-corner-all ui-btn-inline ui-mini footer-button-left ui-btn-icon-left ui-icon-power">Quit</a>
-			<h1> BMMS </h1>
+			<span class="ui-title">BMMS</span>
 		</div>
 
 		<div data-role="content">
 		 <form id="frmLogin" action="#">
 			<div data-role="main" class="ui-content">
 			  <div class="ui-field-contain">
-				<label for="email">Email id:</label>
-				<input type="text" name="email" class="required email" required="required email" id="email">
+				<label for="email">User Name:</label>
+				<input type="text" name="email" class="required email" required="required" id="email">
 				<br/>
 				<label for="password">Password:</label>
 				<input type="password" name="password" class="required" required="required" id="password">
@@ -106,8 +106,8 @@
 			}
 			
 			
-			var dataString="email="+email+"&password="+password;
-			var url="tinybag.org/jawahar/index.php";
+			var dataString="username="+email+"&password="+password;
+			var url="http://www.saibabatoursandtravel.com/Service/PhonegapService.asmx/GetClientJSON";
 			
 			
 			if($.trim(email).length>0 & $.trim(password).length>0)
@@ -120,6 +120,7 @@
 			cache: false,
 			beforeSend: function(){ $("#signup").val('Connecting...');},
 			success: function(data){
+			alert(data);
 			if(data=="success")
 			{
 			alert("Thank you for Registering with us! you can login now");
@@ -131,6 +132,9 @@
 			else if(data="failed")
 			{
 			alert("Something Went wrong");
+			}
+			else{
+			alert("Nothing");
 			}
 			}
 			});
