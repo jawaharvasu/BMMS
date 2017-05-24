@@ -28,10 +28,10 @@ var app = {
     bindEvents: function() {
 		var storage = window.localStorage;
 		var value = storage.getItem("clientname"); 
-		if(value !=null || value !="")
-			document.addEventListener('page2', this.onDeviceReady, false);
-		else
+		if(value == "" )
 			document.addEventListener('home', this.onDeviceReady, false);
+		else
+			document.addEventListener('page2', this.onDeviceReady, false);
     },
     // deviceready Event Handler
     //
