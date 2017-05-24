@@ -84,7 +84,27 @@
 	</div>		
 	
 	
+		<div data-role="page" id="page2">
 	
+		<div data-role="header">
+			<h1>BMMS</h1>
+			<button class="ui-btn-right ui-btn ui-btn-b ui-btn-inline ui-mini ui-corner-all ui-btn-icon-right ui-icon-power" onclick="navigator.app.exitApp();">Quit</button>
+		</div>
+
+		<div data-role="content">
+		 	<div data-role="main" class="ui-content">
+			  <div class="ui-field-contain">
+				<label for="clientname">User Name:</label>
+				<input type="text" name="clientname" id="clientname">
+				<br/>
+				</div>
+			</div>
+		</div>
+
+		<div data-role="footer" data-position="fixed">
+			<h4> &copy; While Technology </h4>
+		</div>
+	</div>	
 	
 	
     <script type="text/javascript" src="cordova.js"></script>
@@ -135,6 +155,12 @@
 			var cool1=JSON.parse(cool.d);
 			if(cool1.RESULT == "SUCCESS1"){
 				alert(" Your id : " + cool1.CLIENT_ID + "\n Name : " + cool1.CLIENT_NAME + "\n ORDER : " + cool1.ORDER + "\n TARGET : " + cool1.TARGET + "\n OPEN : " + cool1.OPEN + "\n BALANCE : " + cool1.BALANCE + "\n SENT : " + cool1.SENT );
+				$("#clientname").val(cool1.CLIENT_NAME);
+				var storage = window.localStorage;
+				//var value = storage.getItem(key); // Pass a key name to get its value.
+				storage.setItem("clientname", cool1.CLIENT_NAME); // Pass a key name and its value to add or update that key.
+				//storage.removeItem(key) // Pass a key name to remove that key from storage.
+				$( ":mobile-pagecontainer" ).pagecontainer( "load", "index.html#page2", { showLoadMsg: false } );
 			}else if(cool1.RESULT == "FAILURE0"){
 				alert("Some error has obtained");
 			}else if(cool1.RESULT == "FAILURE1"){
