@@ -112,6 +112,15 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
+		var storage = window.localStorage;
+		var value = storage.getItem("clientname"); 
+		if(value != "" )
+		 {
+			$("#clientname").val(value);
+			window.location="#page2";
+		 
+		 }
+		
     </script>
 	<script>
 	
