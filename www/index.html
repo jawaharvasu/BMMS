@@ -132,7 +132,8 @@
 			success: function(data){
 			hideSpinner();
 			var cool=JSON.parse(JSON.stringify(data));
-			alert(cool.d.CLIENT_NAME);
+			alert(cool.d);
+			alert(cool.CLIENT_ID);
 			$("#signup").val("Submit");
 			}
 			});
