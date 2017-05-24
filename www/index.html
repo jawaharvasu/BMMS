@@ -160,7 +160,8 @@
 				//var value = storage.getItem(key); // Pass a key name to get its value.
 				storage.setItem("clientname", cool1.CLIENT_NAME); // Pass a key name and its value to add or update that key.
 				//storage.removeItem(key) // Pass a key name to remove that key from storage.
-				$( ":mobile-pagecontainer" ).pagecontainer( "load", "#page2", { showLoadMsg: false } );
+				window.location="#page2";
+				
 			}else if(cool1.RESULT == "FAILURE0"){
 				alert("Some error has obtained");
 			}else if(cool1.RESULT == "FAILURE1"){
