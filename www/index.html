@@ -132,11 +132,21 @@
 			success: function(data){
 			hideSpinner();
 			var cool=JSON.parse(JSON.stringify(data));
-			alert(cool.d);
 			var cool1=JSON.parse(cool.d);
-			alert(cool1.ORDER);
-			alert(cool1.CLIENT_ID);
-			alert(cool1.STATUS);
+			if(cool1.RESULT == "SUCCESS1"){
+				alert(" Your id : " + cool1.CLIENT_ID + "\n Name : " + cool1.CLIENT_NAME + "\n ORDER : " + cool1.ORDER + "\n TARGET : " + cool1.TARGET + "\n OPEN : " + cool1.OPEN + "\n BALANCE : " + cool1.BALANCE + "\n SENT : " + cool1.SENT );
+			}else if(cool1.RESULT == "FAILURE0"){
+				alert("Some error has obtained");
+			}else if(cool1.RESULT == "FAILURE1"){
+				alert("Username or password is mismatch");
+			}else if(cool1.RESULT == "FAILURE2"){
+				alert("This is not a client account");
+			}else if(cool1.RESULT == "FAILURE3"){
+				alert("No Data's Found Today");
+			}else{
+				alert("Check your internet connection");
+			}
+			
 			$("#signup").val("Submit");
 			}
 			});
