@@ -131,7 +131,8 @@
 			cache: false,
 			success: function(data){
 			hideSpinner();
-			alert(JSON.stringify(data));
+			var cool=JSON.parse(JSON.stringify(data));
+			alert(cool.d.CLIENT_NAME);
 			$("#signup").val("Submit");
 			}
 			});
