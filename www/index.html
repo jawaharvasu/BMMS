@@ -133,7 +133,10 @@
 			hideSpinner();
 			var cool=JSON.parse(JSON.stringify(data));
 			alert(cool.d);
-			alert(cool.CLIENT_ID);
+			alert(cool.d.ORDER);
+			alert(cool.d.CLIENT_ID);
+			alert(cool.d.CLIENT_NAME);
+			
 			$("#signup").val("Submit");
 			}
 			});
