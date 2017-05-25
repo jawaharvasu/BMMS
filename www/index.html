@@ -113,12 +113,13 @@
     <script type="text/javascript">
         app.initialize();
 		var storage = window.localStorage;
-		var value = storage.getItem("clientname"); 
+		createPref("cool1",MODE_PRIVATE);
+		
+		var value = getValue("clientname");; 
 		if(value != "" )
 		 {
 			$("#clientname").val(value);
 			window.location="#page2";
-		 
 		 }
 		
     </script>
@@ -133,9 +134,33 @@
 			}
 			
 			function logout(){
-				var storage = window.localStorage;
-				storage.removeItem("clientname");
+				clearAll();
+				window.location="#home";
 			}
+			
+			
+			function createPref(filename, mode){
+				sharedpreferences.getSharedPreferences(filename, mode, successHandler, errorHandler);
+			}
+			
+			
+			function putValue(key, value){
+	sharedpreferences.putString(key, value, successHandler, errorHandler);
+
+}
+function getValue(key){
+	sharedpreferences.getString(key, successHandler, errorHandler);
+}
+
+
+function remove(key){
+sharedpreferences.remove(key, successHandler, errorHandler);
+}
+
+
+function clearAll(){
+sharedpreferences.clear(successHandler, errorHandler);
+}
 
 			
 		$("#signup").click(function(){
@@ -173,10 +198,8 @@
 			if(cool1.RESULT == "SUCCESS1"){
 				alert(" Your id : " + cool1.CLIENT_ID + "\n Name : " + cool1.CLIENT_NAME + "\n ORDER : " + cool1.ORDER + "\n TARGET : " + cool1.TARGET + "\n OPEN : " + cool1.OPEN + "\n BALANCE : " + cool1.BALANCE + "\n SENT : " + cool1.SENT );
 				$("#clientname").val(cool1.CLIENT_NAME);
-				var storage = window.localStorage;
-				//var value = storage.getItem(key); // Pass a key name to get its value.
-				storage.setItem("clientname", cool1.CLIENT_NAME); // Pass a key name and its value to add or update that key.
-				//storage.removeItem(key) // Pass a key name to remove that key from storage.
+				createPref("cool1",MODE_PRIVATE);
+				putValue("clientname", cool1.CLIENT_NAME);
 				window.location="#page2";
 				
 			}else if(cool1.RESULT == "FAILURE0"){
