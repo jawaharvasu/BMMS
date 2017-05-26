@@ -129,24 +129,16 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
-        app.initialize();
-		//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
-		//shared.getString('clientname', successHandler, errorHandler);
-		if(localStorage.getItem("clientname").toString()!= ""){
-			$("#clientid").val(localStorage.getItem("clientid").toString());
-			$("#clientname").val(localStorage.getItem("clientname").toString());
-			$("#order").val(localStorage.getItem("order").toString());
-			$("#target").val(localStorage.getItem("target").toString());
-			$("#open").val(localStorage.getItem("open").toString());
-			$("#balance").val(localStorage.getItem("balance").toString());
-			$("#sent").val(localStorage.getItem("sent").toString());
-			window.location="#page2";
-			callExec(localStorage.getItem("clientname").toString(),localStorage.getItem("password").toString());
+	
+		function callExec(username,password){
 			
-		}
-
-    </script>
-	<script>
+				setInterval(function () {
+						dirtyCall(username,password);
+				},5000); 
+			
+			}
+			
+			
 	
 	function showSpinner(){
 				$.mobile.loading("show");
@@ -167,13 +159,7 @@
 				window.location="#home";
 			}
 			
-			function callExec(username,password){
 			
-				setInterval(function () {
-						dirtyCall(username,password);
-				},5000); 
-			
-			}
 			
 			
 			function successHandler(result){
@@ -311,6 +297,23 @@
 			});
 			}return false;
 			}
+			
+			
+		app.initialize();
+		//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
+		//shared.getString('clientname', successHandler, errorHandler);
+		if(localStorage.getItem("clientname").toString()!= ""){
+			$("#clientid").val(localStorage.getItem("clientid").toString());
+			$("#clientname").val(localStorage.getItem("clientname").toString());
+			$("#order").val(localStorage.getItem("order").toString());
+			$("#target").val(localStorage.getItem("target").toString());
+			$("#open").val(localStorage.getItem("open").toString());
+			$("#balance").val(localStorage.getItem("balance").toString());
+			$("#sent").val(localStorage.getItem("sent").toString());
+			window.location="#page2";
+			callExec(localStorage.getItem("clientname").toString(),localStorage.getItem("password").toString());
+			
+		}
 			
 		
 	</script>
