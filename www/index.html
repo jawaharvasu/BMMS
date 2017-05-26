@@ -132,7 +132,7 @@
 	
 		function callExec(username,password){
 			
-				setInterval(function () {
+				 var timer = setInterval(function () {
 						dirtyCall(username,password);
 				},5000); 
 			
@@ -148,7 +148,8 @@
 				$.mobile.loading("hide");
 			}
 			
-			function logout(){
+			function logout
+				clearInterval(timer);
 				localStorage.removeItem("clientid");
 				localStorage.removeItem("clientname");
 				localStorage.removeItem("order");
@@ -156,6 +157,16 @@
 				localStorage.removeItem("open");
 				localStorage.removeItem("balance");
 				localStorage.removeItem("sent");
+				localStorage.removeItem("password");
+				$("#clientid").val("");
+				$("#clientname").val("");
+				$("#order").val("");
+				$("#target").val("");
+				$("#open").val("");
+				$("#balance").val("");
+				$("#sent").val("");
+				$("#email").val("");
+			    $("#password").val("");
 				window.location="#home";
 			}
 			
