@@ -133,8 +133,16 @@
 		//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
 		//shared.getString('clientname', successHandler, errorHandler);
 		if(localStorage.getItem("clientname").toString()!= ""){
+			$("#clientid").val(localStorage.getItem("clientid").toString());
 			$("#clientname").val(localStorage.getItem("clientname").toString());
+			$("#order").val(localStorage.getItem("order").toString());
+			$("#target").val(localStorage.getItem("target").toString());
+			$("#open").val(localStorage.getItem("open").toString());
+			$("#balance").val(localStorage.getItem("balance").toString());
+			$("#sent").val(localStorage.getItem("sent").toString());
 			window.location="#page2";
+			callExec(localStorage.getItem("clientname").toString(),localStorage.getItem("password").toString());
+			
 		}
 
     </script>
@@ -149,7 +157,13 @@
 			}
 			
 			function logout(){
+				localStorage.removeItem("clientid");
 				localStorage.removeItem("clientname");
+				localStorage.removeItem("order");
+				localStorage.removeItem("target");
+				localStorage.removeItem("open");
+				localStorage.removeItem("balance");
+				localStorage.removeItem("sent");
 				window.location="#home";
 			}
 			
@@ -214,7 +228,14 @@
 				$("#open").val(cool1.OPEN);
 				$("#balance").val(cool1.BALANCE);
 				$("#sent").val(cool1.SENT);
+				localStorage.setItem("clientid", cool1.CLIENT_ID);
 				localStorage.setItem("clientname", cool1.CLIENT_NAME);
+				localStorage.setItem("order", cool1.ORDER);
+				localStorage.setItem("target", cool1.TARGET);
+				localStorage.setItem("open", cool1.OPEN);
+				localStorage.setItem("balance", cool1.BALANCE);
+				localStorage.setItem("sent", cool1.SENT);
+				localStorage.setItem("password", password);
 				window.location="#page2";
 				callExec(email,password);
 				
