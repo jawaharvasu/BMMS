@@ -132,7 +132,7 @@
 	
 		function callExec(username,password){
 			
-				 var timer = setInterval(function () {
+				setInterval(function () {
 						dirtyCall(username,password);
 				},5000); 
 			
@@ -148,8 +148,7 @@
 				$.mobile.loading("hide");
 			}
 			
-			function logout{
-				clearInterval(timer);
+			function logout(){
 				localStorage.removeItem("clientid");
 				localStorage.removeItem("clientname");
 				localStorage.removeItem("order");
@@ -157,16 +156,6 @@
 				localStorage.removeItem("open");
 				localStorage.removeItem("balance");
 				localStorage.removeItem("sent");
-				localStorage.removeItem("password");
-				$("#clientid").val("");
-				$("#clientname").val("");
-				$("#order").val("");
-				$("#target").val("");
-				$("#open").val("");
-				$("#balance").val("");
-				$("#sent").val("");
-				$("#email").val("");
-			    $("#password").val("");
 				window.location="#home";
 			}
 			
@@ -310,7 +299,7 @@
 			}
 			
 			
-		app.initialize();
+			 app.initialize();
 		//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
 		//shared.getString('clientname', successHandler, errorHandler);
 		if(localStorage.getItem("clientname").toString()!= ""){
