@@ -95,8 +95,26 @@
 		<div data-role="content">
 		 	<div data-role="main" class="ui-content">
 			  <div class="ui-field-contain">
+			  <label for="clientid">User ID:</label>
+				<input type="text" name="clientid" id="clientid">
+				<br/>
 				<label for="clientname">User Name:</label>
 				<input type="text" name="clientname" id="clientname">
+				<br/>
+				<label for="order">Order:</label>
+				<input type="text" name="order" id="order">
+				<br/>
+				<label for="target">Target:</label>
+				<input type="text" name="target" id="target">
+				<br/>
+				<label for="open">Open:</label>
+				<input type="text" name="open" id="open">
+				<br/>
+				<label for="balance">Balance:</label>
+				<input type="text" name="balance" id="balance">
+				<br/>
+				<label for="sent">Sent:</label>
+				<input type="text" name="sent" id="sent">
 				<br/>
 				</div>
 			</div>
@@ -112,16 +130,13 @@
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();
-		var storage = window.localStorage;
-		createPref("cool1",MODE_PRIVATE);
-		
-		var value = getValue("clientname");; 
-		if(value != "" )
-		 {
-			$("#clientname").val(value);
+		//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
+		//shared.getString('clientname', successHandler, errorHandler);
+		if(localStorage.getItem("clientname").toString()!= ""){
+			$("#clientname").val(localStorage.getItem("clientname").toString());
 			window.location="#page2";
-		 }
-		
+		}
+
     </script>
 	<script>
 	
@@ -134,35 +149,27 @@
 			}
 			
 			function logout(){
-				clearAll();
+				localStorage.removeItem("clientname");
 				window.location="#home";
 			}
 			
+			function callExec(username,password){
 			
-			function createPref(filename, mode){
-				sharedpreferences.getSharedPreferences(filename, mode, successHandler, errorHandler);
+				setInterval(function () {
+						dirtyCall(username,password);
+				},5000); 
+			
 			}
 			
 			
-			function putValue(key, value){
-	sharedpreferences.putString(key, value, successHandler, errorHandler);
+			function successHandler(result){
+				alert("SUCCESS: \r\n"+result );
+			}
 
-}
-function getValue(key){
-	sharedpreferences.getString(key, successHandler, errorHandler);
-}
+			function errorHandler(result){
+				alert("ERORR: \r\n"+result );
+			}			
 
-
-function remove(key){
-sharedpreferences.remove(key, successHandler, errorHandler);
-}
-
-
-function clearAll(){
-sharedpreferences.clear(successHandler, errorHandler);
-}
-
-			
 		$("#signup").click(function(){
 		
 			var email=$("#email").val();
@@ -196,11 +203,22 @@ sharedpreferences.clear(successHandler, errorHandler);
 			var cool=JSON.parse(JSON.stringify(data));
 			var cool1=JSON.parse(cool.d);
 			if(cool1.RESULT == "SUCCESS1"){
-				alert(" Your id : " + cool1.CLIENT_ID + "\n Name : " + cool1.CLIENT_NAME + "\n ORDER : " + cool1.ORDER + "\n TARGET : " + cool1.TARGET + "\n OPEN : " + cool1.OPEN + "\n BALANCE : " + cool1.BALANCE + "\n SENT : " + cool1.SENT );
+				//alert(" Your id : " + cool1.CLIENT_ID + "\n Name : " + cool1.CLIENT_NAME + "\n ORDER : " + cool1.ORDER + "\n TARGET : " + cool1.TARGET + "\n OPEN : " + cool1.OPEN + "\n BALANCE : " + cool1.BALANCE + "\n SENT : " + cool1.SENT );
+				//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
+				//shared.putString('clientname', cool1.CLIENT_NAME, successHandler, errorHandler);
+				
+				$("#clientid").val(cool1.CLIENT_ID);
 				$("#clientname").val(cool1.CLIENT_NAME);
-				createPref("cool1",MODE_PRIVATE);
-				putValue("clientname", cool1.CLIENT_NAME);
+				$("#order").val(cool1.ORDER);
+				$("#target").val(cool1.TARGET);
+				$("#open").val(cool1.OPEN);
+				$("#balance").val(cool1.BALANCE);
+				$("#sent").val(cool1.SENT);
+				localStorage.setItem("clientname", cool1.CLIENT_NAME);
 				window.location="#page2";
+				callExec(email,password);
+				
+				
 				
 			}else if(cool1.RESULT == "FAILURE0"){
 				alert("Some error has obtained");
@@ -219,6 +237,59 @@ sharedpreferences.clear(successHandler, errorHandler);
 			});
 			}return false;
 			});
+			
+			
+			
+			function dirtyCall(email,password){
+		
+			if(!email){
+			return;
+			}
+			
+			if(!password){
+			return;
+			}
+			
+			
+			var dataString="username="+email+"&password="+password;
+			var url="saibabatoursandtravel.com/ServiceCS.asmx/GetClientJSON";
+			
+			showSpinner();
+			$("#signup").val("Connecting...");
+			if($.trim(email).length>0 & $.trim(password).length>0)
+			{
+			$.ajax({
+			type: "POST",
+			url: "http://saibabatoursandtravel.com/ServiceCS.asmx/GetClientJSON",
+			data: JSON.stringify({ username : email , password : password }),
+			contentType: "application/json; charset=utf-8",
+			dataType: "json",
+			crossDomain: true,
+			cache: false,
+			success: function(data){
+			hideSpinner();
+			var cool=JSON.parse(JSON.stringify(data));
+			var cool1=JSON.parse(cool.d);
+			if(cool1.RESULT == "SUCCESS1"){
+				//alert(" Your id : " + cool1.CLIENT_ID + "\n Name : " + cool1.CLIENT_NAME + "\n ORDER : " + cool1.ORDER + "\n TARGET : " + cool1.TARGET + "\n OPEN : " + cool1.OPEN + "\n BALANCE : " + cool1.BALANCE + "\n SENT : " + cool1.SENT );
+				//var shared=sharedpreferences.getSharedPreferences('shared_preferences', 'MODE_PRIVATE', successHandler, errorHandler);
+				//shared.putString('clientname', cool1.CLIENT_NAME, successHandler, errorHandler);
+				$("#clientid").val(cool1.CLIENT_ID);
+				$("#clientname").val(cool1.CLIENT_NAME);
+				$("#order").val(cool1.ORDER);
+				$("#target").val(cool1.TARGET);
+				$("#open").val(cool1.OPEN);
+				$("#balance").val(cool1.BALANCE);
+				$("#sent").val(cool1.SENT);
+				window.location="#page2";
+				
+			}
+			
+			//$("#signup").val("Submit");
+			}
+			});
+			}return false;
+			}
 			
 		
 	</script>
